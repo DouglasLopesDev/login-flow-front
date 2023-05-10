@@ -1,3 +1,4 @@
+<!-- https://douglaslopesdev.github.io/login-flow-front -->
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -25,18 +26,45 @@
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
     <title>Site Customizado!!!</title>
+
+    <link rel="stylesheet" href="https://douglaslopesdev.github.io/login-flow-front/style.css" type="text/css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/17.0.2/umd/react.development.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/17.0.2/umd/react-dom.development.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js"></script>
+
   </head>
   <body>
     <!-- <noscript>You need to enable JavaScript to run this app.</noscript> -->
     <div id="root"></div>
+    <div id="app"></div>
     <div id="meu-componente"></div>
-    
     <script src="https://douglaslopesdev.github.io/login-flow-front/meu-componente.js"></script>
     <script>
       document.getElementById('meu-componente').innerHTML = meuComponente();
     </script>
-    
-    <h1>teste 02</h1>
+    <!-- Transpile e renderize o componente -->
+    <script type="text/babel">
+      const App = () => {
+        return (
+          <div className="App">
+            <div className="App-header">
+              <img src="../src/logo.svg" className="App-logo" alt="logo" />
+              <p>
+                Edit <code>src/App.js</code> and save to reload.
+              </p>
+            </div>
+            <div style={{backgroundColor:"white"}}>
+              <h1>Conecte-se</h1>
+              <div id="api"></div>
+            </div>
+          </div>
+        );
+      }
+
+      ReactDOM.render(<App />, document.getElementById("app"));
+    </script>
+    <h1>teste 01</h1>
     <div id="api"></div>
     <!--
       This HTML file is a template.
