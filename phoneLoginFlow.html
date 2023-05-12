@@ -1,0 +1,1231 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta
+      name="description"
+      content="Web site created using create-react-app"
+    />
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    
+    <title>React App</title>
+  </head>
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
+    
+  </body>
+</html> -->
+
+
+<!DOCTYPE html>
+<html>
+
+<head>
+
+  <title>Cuidados pela vida - Viva mais e melhor</title>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+  <style id="common">
+    @font-face {
+      font-family: 'SegoeUI';
+      src: url(https://acheidentitydev.b2clogin.com/static/tenant/templates/fonts/segoeui.WOFF);
+      font-weight: normal;
+    }
+
+    @font-face {
+      font-family: 'SegoeUI';
+      src: url(https://acheidentitydev.b2clogin.com/static/tenant/templates/fonts/segoeui_bold.WOFF);
+      font-weight: bold;
+    }
+
+    .buttons #cancel:before {
+      content: url(https://acheidentitydev.b2clogin.com/static/tenant/templates/images/left-arrow.svg);
+    }
+  </style>
+  <style id="idpselector">
+    #SignInWithLogonNameExchange,
+    #SignUpWithLogonEmailExchange,
+    #SignUpWithLogonNameExchange {
+      background-image: url(https://acheidentitydev.b2clogin.com/static/tenant/templates/idp_logos/colored/local.svg);
+    }
+
+    #SignInWithLogonNameExchange:hover,
+    #SignUpWithLogonEmailExchange:hover,
+    #SignUpWithLogonNameExchange:hover {
+      background-image: url(https://acheidentitydev.b2clogin.com/static/tenant/templates/idp_logos/white/local.svg);
+    }
+  </style>
+
+  <style>
+    html {
+      background: 0 0
+    }
+
+    body {
+      font-family: Segoe UI, SegoeUI, "Helvetica Neue", Helvetica, Arial, sans-serif;
+      background-attachment: fixed;
+      background-color: #f5f5f5;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      text-align: left
+    }
+
+    p {
+      margin: 20px !important;
+    }
+
+    a:focus {
+      outline: 0
+    }
+
+    input,
+    select {
+      /* border: 1px solid #fff; */
+      z-index: 1;
+      border: 0;
+      cursor: pointer;
+      border-radius: 8px;
+      position: relative;
+      background-color: rgb(255, 255, 255);
+      border: 0.5px solid rgb(206, 212, 218);
+      font-size: 16px;
+      padding: 11px 12px;
+      transition: border-color 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, background-color 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+
+    }
+
+    input[type=email]:focus,
+    input[type=password]:focus,
+    input[type=text]:focus,
+    select:focus {
+      border: 1px solid rgba(41, 110, 198, 1.0)
+    }
+
+    img[data-tenant-branding-background=true] {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 0;
+      position: fixed;
+      left: 0;
+      overflow: hidden;
+      top: 0
+    }
+
+    .container {
+      text-align: center;
+      width: 100%;
+      display: table;
+      height: 100vh;
+      padding: 0
+    }
+
+    #api {
+      margin: 0 auto
+    }
+
+    .col-lg-6 {
+      max-width: 470px;
+      width: 100%;
+      float: none;
+      display: inline-block;
+      vertical-align: top;
+      padding: 0
+    }
+
+    .row {
+      width: 100%;
+      margin: 0;
+      display: table-cell;
+      vertical-align: middle
+    }
+
+    ul {
+      padding: 0
+    }
+
+    #simplemodal-container .simplemodal-data {
+      padding: 5px 8px;
+      overflow: hidden;
+      background-color: #fff;
+      border-radius: 3px;
+      font-style: italic
+    }
+
+    #SignInWithLogonNameExchange {
+      background-color: #296ec6;
+      background-image: url(none);
+      background-size: 10%;
+      background-position-x: 95%;
+      background-position-y: 50%;
+      background-repeat: no-repeat;
+      border-radius: .5rem;
+      width: 100%;
+      width: 100%;
+      font-size: 1em;
+      margin-left: auto
+    }
+
+    #SignInWithLogonNameExchange:hover {
+      background-color: #1662c7
+    }
+
+    #AmazonExchange:hover {
+      background-color: #36474f !important
+    }
+
+    #FacebookExchange:hover {
+      background-color: #3b5595 !important
+    }
+
+    #GitHubExchange:hover {
+      background-color: #0f0f0f !important
+    }
+
+    #AppleExchange:hover {
+      background-color: #0f0f0f !important
+    }
+
+    #GoogleExchange:hover {
+      background-color: #c64a29 !important
+    }
+
+    #LinkedInExchange:hover {
+      background-color: #0274b3 !important
+    }
+
+    #MicrosoftAccountExchange:hover {
+      background-color: #01a4ef !important
+    }
+
+    #QQExchange:hover {
+      background-color: #1a97df !important
+    }
+
+    #TwitterExchange:hover {
+      background-color: #1da1f2 !important
+    }
+
+    #WeChatExchange:hover {
+      background-color: #4cc522 !important
+    }
+
+    #WeiboExchange:hover {
+      background-color: #e81123 !important
+    }
+
+    .buttons #continue:disabled {
+      pointer-events: none;
+      display: inline-flex;
+      -webkit-box-align: center;
+      align-items: center;
+      -webkit-box-pack: center;
+      justify-content: center;
+      position: relative;
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+      outline: 0px;
+      border: 0px;
+      margin: 0px;
+      cursor: pointer;
+      user-select: none;
+      vertical-align: middle;
+      appearance: none;
+      text-decoration: none;
+      /* font-size: 0.875rem; */
+      font-size: 1.5rem;
+      line-height: 1.75;
+      min-width: 64px;
+      box-shadow: rgba(0, 0, 0, 0.2) 0px 3px 1px -2px, rgba(0, 0, 0, 0.14) 0px 2px 2px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5px 0px;
+      width: 100%;
+      text-transform: none;
+      border-radius: 500px;
+      font-family: Inter, sans-serif;
+      font-weight: 600;
+      padding: 11px 16px;
+      background-color: rgba(195, 195, 196, 0.16);
+      color: rgba(41, 41, 41, 0.32);
+    }
+
+    .buttons #continue {
+      display: inline-flex;
+      -webkit-box-align: center;
+      align-items: center;
+      -webkit-box-pack: center;
+      justify-content: center;
+      position: relative;
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+      outline: 0px;
+      border: 0px;
+      margin: 0px;
+      cursor: pointer;
+      user-select: none;
+      vertical-align: middle;
+      appearance: none;
+      text-decoration: none;
+      /* font-size: 0.875rem; */
+      font-size: 1.5rem;
+      line-height: 1.75;
+      min-width: 64px;
+      transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, border-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+      color: rgb(255, 255, 255);
+      background-color: rgb(246, 32, 121);
+      box-shadow: rgba(0, 0, 0, 0.2) 0px 3px 1px -2px, rgba(0, 0, 0, 0.14) 0px 2px 2px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5px 0px;
+      width: 100%;
+      text-transform: none;
+      border-radius: 500px;
+      font-family: Inter, sans-serif;
+      font-weight: 600;
+      padding: 11px 16px;
+    }
+
+    .buttons #continue:hover {
+      -moz-box-shadow: none;
+      -webkit-box-shadow: none;
+      box-shadow: none;
+      background-color: #AC1654;
+      border-color: #AC1654
+    }
+
+    .buttons #cancel {
+      padding: 0;
+      margin-left: auto;
+      background: 0 0;
+      border: 0;
+      width: inherit;
+      position: absolute;
+      background-color: transparent;
+      top: 2px;
+      left: 15px;
+      font-size: 1em;
+      color: #505050;
+      box-shadow: none;
+      text-align: left
+    }
+
+    .buttons #cancel:hover {
+      color: #000 !important
+    }
+
+    .buttons #cancel:before {
+      padding: 10px;
+      vertical-align: sub;
+      zoom: 90%;
+      display: inline-block
+    }
+
+    #attributeList ul {
+      padding: 0
+    }
+
+    #attributeList ul li {
+      list-style: none;
+      margin: 1rem 0
+    }
+
+    label {
+      font-weight: 600
+    }
+
+    #attributeList ul li label {
+      float: left
+    }
+
+    #attributeList ul li.EmailBox label,
+    #attributeList ul li.Password label,
+    #attributeList ul li.TextBox label {
+      /* display: none !important */
+    }
+
+    #attributeList ul li label[for=country] {
+      float: left;
+      display: inline-block !important;
+      margin-bottom: .5rem
+    }
+
+    #attributeList ul li label[for=cpiminternal_legalCountry] {
+      float: none;
+      display: block !important;
+      text-align: left;
+      margin-bottom: .5rem
+    }
+
+    #attributeList ul li label[for=cpiminternal_dateOfBirth] {
+      float: none;
+      text-align: left;
+      display: block !important;
+      margin-bottom: .5rem
+    }
+
+    #attributeList ul li input {
+      /* outline: 0;
+            height: 50px;
+            width: 70%;
+            border-radius: 100.5rem;
+            text-indent: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 150, .15) */
+      /* customizado para novo modelo de campo */
+      border-radius: 8px;
+      position: relative;
+      background-color: rgb(255, 255, 255);
+      border: 0.5px solid rgb(206, 212, 218);
+      font-size: 16px;
+      padding: 11px 12px;
+      transition: border-color 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, background-color 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+    }
+
+    .inputInvalid {
+      border-color: rgb(234, 31, 31) !important;
+      background-color: rgb(253, 196, 196) !important
+    }
+
+    #attributeList ul li input::-webkit-input-placeholder {
+      text-indent: 20px
+    }
+
+    #attributeList ul li .attrEntry.validate input.invalid,
+    #attributeList ul li .attrEntry.validate input:invalid {
+      border: 1px solid #b00
+    }
+
+    #attributeList ul li .attrEntry .verify {
+      margin-top: 2rem;
+      padding-bottom: 10px;
+      position: relative
+    }
+
+    #attributeList ul li .attrEntry .verificationControlContent .buttons {
+      margin-top: 2rem;
+      padding-bottom: 10px;
+      position: relative
+    }
+
+    #attributeList ul li .attrEntry .verify .sendButton[id$=ver_but_send] {
+      width: 60%;
+      height: 50px;
+      background-color: #296ec6;
+      color: #fff;
+      border-radius: .5rem
+    }
+
+    #attributeList ul li .attrEntry .verificationControlContent .sendCode {
+      display: inline-flex;
+      -webkit-box-align: center;
+      align-items: center;
+      -webkit-box-pack: center;
+      justify-content: center;
+      position: relative;
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+      outline: 0px;
+      border: 0px;
+      margin: 0px;
+      cursor: pointer;
+      user-select: none;
+      vertical-align: middle;
+      appearance: none;
+      text-decoration: none;
+      /* font-size: 0.875rem; */
+      font-size: 1.5rem;
+      line-height: 1.75;
+      min-width: 64px;
+      transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, border-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+      color: rgb(255, 255, 255);
+      background-color: rgb(246, 32, 121);
+      box-shadow: rgba(0, 0, 0, 0.2) 0px 3px 1px -2px, rgba(0, 0, 0, 0.14) 0px 2px 2px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5px 0px;
+      width: 100%;
+      text-transform: none;
+      border-radius: 500px;
+      font-family: Inter, sans-serif;
+      font-weight: 600;
+      padding: 11px 16px;
+    }
+
+    #attributeList ul li .attrEntry .verify .sendButton[id$=ver_but_send]:hover {
+      /* background-color: #1662c7 */
+      -moz-box-shadow: none;
+      -webkit-box-shadow: none;
+      box-shadow: none;
+      background-color: #AC1654;
+      border-color: #AC1654
+    }
+
+    #attributeList ul li .attrEntry .verificationControlContent .sendCode:hover {
+      -moz-box-shadow: none;
+      -webkit-box-shadow: none;
+      box-shadow: none;
+      background-color: #AC1654;
+      border-color: #AC1654
+    }
+
+    @media screen and (-ms-high-contrast:active) {
+
+      #attributeList ul li .attrEntry .verify button,
+      .buttons #continue {
+        border: 1px dashed #fff !important
+      }
+
+      #attributeList ul li .attrEntry .verify button:hover,
+      .buttons #continue:hover {
+        border: 1px solid #fff !important
+      }
+    }
+
+    #attributeList ul li .attrEntry .verify .verifyButton {
+      width: inherit;
+      padding: 0 20px;
+      height: 50px;
+      background-color: #296ec6;
+      color: #fff;
+      margin-right: 5px;
+      border-radius: .5rem
+    }
+
+    #attributeList ul li .attrEntry .verificationControlContent .verifyCode {
+      width: inherit;
+      padding: 0 20px;
+      height: 50px;
+      background-color: #296ec6;
+      color: #fff;
+      margin-right: 5px;
+      border-radius: .5rem
+    }
+
+    #attributeList ul li .attrEntry .verify .verifyButton:hover {
+      background-color: #1662c7
+    }
+
+    #attributeList ul li .attrEntry .verificationControlContent .verifyCode:hover {
+      background-color: #1662c7
+    }
+
+    #attributeList ul li .attrEntry .verify .sendButton[id$=ver_but_resend] {
+      width: inherit;
+      padding: 0 20px;
+      border: 0;
+      font-size: 1em;
+      height: 50px;
+      right: 0;
+      bottom: -38px;
+      background-color: #296ec6;
+      color: #fff;
+      border-radius: .5rem
+    }
+
+    #attributeList ul li .attrEntry .verificationControlContent .sendNewCode {
+      width: inherit;
+      padding: 0 20px;
+      border: 0;
+      font-size: 1em;
+      height: 50px;
+      right: 0;
+      bottom: -38px;
+      background-color: #296ec6;
+      color: #fff;
+      border-radius: .5rem
+    }
+
+    #attributeList ul li .attrEntry .verify .sendButton[id$=ver_but_resend]:hover {
+      background-color: #1662c7
+    }
+
+    #attributeList ul li .attrEntry .verificationControlContent .sendNewCode:hover {
+      background-color: #1662c7
+    }
+
+    #attributeList ul li .attrEntry .verify .editButton {
+      border: none;
+      color: #fff;
+      background-color: #296ec6;
+      width: 60%;
+      height: 50px;
+      border-radius: .5rem
+    }
+
+    #attributeList ul li .attrEntry .verificationControlContent .changeClaims {
+      border: none;
+      color: #fff;
+      background-color: #296ec6;
+      width: 60%;
+      height: 50px;
+      border-radius: .5rem
+    }
+
+    #attributeList ul li .attrEntry .verify .editButton:hover {
+      background-color: #1662c7
+    }
+
+    #attributeList ul li .attrEntry .verificationControlContent .changeClaims:hover {
+      background-color: #1662c7
+    }
+
+    #attributeList ul li .attrEntry .verify #email_ver_input_label {
+      display: none !important
+    }
+
+    #api .working {
+      background: url(data:image/gif;base64,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) no-repeat;
+      height: 30px;
+      width: auto;
+      background-position: center bottom
+    }
+
+    #attributeList ul li .attrEntry .itemLevel {
+      display: none
+    }
+
+    #attributeList ul li .attrEntry .dropdown_single {
+      height: 45px;
+      border-radius: .5rem;
+      width: 100%;
+      padding-left: 15px;
+      box-shadow: 0 2px 10px rgba(0, 0, 150, .15)
+    }
+
+    #attributeList ul li .attrEntry div#cpiminternal_dateOfBirth.date {
+      display: table;
+      width: 100%
+    }
+
+    #attributeList ul li .attrEntry div#cpiminternal_dateOfBirth.date select {
+      border-radius: .5rem;
+      display: table-cell;
+      height: 50px;
+      box-shadow: 0 2px 10px rgba(0, 0, 150, .15);
+      padding-left: 15px
+    }
+
+    #attributeList ul li .attrEntry div#cpiminternal_dateOfBirth select#cpiminternal_dateOfBirth_day.day {
+      margin-right: 3%;
+      width: 23%
+    }
+
+    #attributeList ul li .attrEntry div#cpiminternal_dateOfBirth select#cpiminternal_dateOfBirth_month.month {
+      margin-right: 3%;
+      width: 38%
+    }
+
+    #attributeList ul li .attrEntry div#cpiminternal_dateOfBirth select#cpiminternal_dateOfBirth_year.year {
+      width: 33%
+    }
+
+    #attributeList ul li .helpLink {
+      display: none
+    }
+
+    #attributeVerification .buttons {
+      margin-top: 30px
+    }
+
+    @media screen and (max-width:100%) {
+      .row .panel-default .panel-body {
+        margin-top: 40px
+      }
+
+      .row .panel-default .panel-body .branding img {
+        display: block;
+        height: 80px;
+        width: auto;
+        margin: 0 auto
+      }
+
+      .row .panel-default .panel-body .branding h1 {
+        display: none
+      }
+
+      .row .panel-default .panel-body h3 {
+        font-size: 1.5em;
+        margin-top: 15px
+      }
+
+      #attributeVerification #attributeList ul li input {
+        width: 60%;
+        height: 40px;
+        border-radius: .5rem;
+        border: none;
+        text-indent: 10px;
+        box-shadow: 0 0 40px 2px #dae1f7
+      }
+
+      #attributeVerification #attributeList ul li input::-webkit-input-placeholder {
+        text-indent: 10px
+      }
+
+      #attributeVerification #attributeList ul li #email {
+        width: 65%;
+        float: left;
+        position: relative;
+        z-index: 2
+      }
+
+      #attributeVerification #attributeList ul li #email_ver_but_verify {
+        background: 0 0;
+        border: 0;
+        color: #496ad8;
+        font-size: 1em;
+        position: relative;
+        right: 0;
+        top: 60px;
+        font-size: 1.1em;
+        width: auto;
+        z-index: 1;
+        height: 20px
+      }
+
+      #attributeVerification #attributeList ul li #email_ver_input {
+        min-width: 50%;
+        width: 60%;
+        float: left
+      }
+
+      #attributeVerification #attributeList ul li #email_ver_but_resend {
+        top: 10px;
+        font-size: 1.1em;
+        height: 20px
+      }
+
+      #attributeVerification #attributeList ul li .attrEntry #email {
+        height: 40px
+      }
+
+      #attributeVerification #attributeList ul li .attrEntry .verify #email_ver_but_send:after {
+        content: " Verify";
+        font-size: 1.1em;
+        font-style: bold;
+        margin-left: 40%
+      }
+
+      #attributeVerification #attributeList ul li .attrEntry .verify #email_ver_but_send {
+        height: 40px;
+        width: auto;
+        float: right;
+        overflow: hidden;
+        text-indent: -200px
+      }
+
+      #attributeVerification #attributeList ul li .attrEntry .verify #email_ver_but_edit {
+        margin-bottom: 15px;
+        border: none;
+        color: #fff;
+        background-color: #496ad8;
+        border-radius: .5rem;
+        font-size: 1em;
+        box-shadow: 0 0 40px 2px #dae1f7;
+        width: 30%;
+        height: 40px;
+        overflow: hidden;
+        padding-top: 6px;
+        margin-left: 40%
+      }
+
+      #attributeVerification #attributeList ul li .attrEntry .verify:after {
+        content: " ";
+        display: block;
+        clear: both
+      }
+
+      #attributeVerification #attributeList #verifying_blurb {
+        margin-top: 15px
+      }
+
+      #attributeVerification .buttons #continue {
+        height: 40px
+      }
+
+      #attributeVerification .buttons #cancel {
+        font-size: 1em;
+        left: 40%
+      }
+    }
+
+    .panel,
+    .panel_layout,
+    .panel_layout_row,
+    body,
+    html {
+      height: 100%
+    }
+
+    .accountButton,
+    .buttons button {
+      display: inline-flex;
+      -webkit-box-align: center;
+      align-items: center;
+      -webkit-box-pack: center;
+      justify-content: center;
+      position: relative;
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+      outline: 0px;
+      border: 0px;
+      margin: 0px;
+      margin-top: 10px;
+      margin-right: auto;
+      cursor: pointer;
+      user-select: none;
+      vertical-align: middle;
+      appearance: none;
+      text-decoration: none;
+      /* font-size: 0.875rem; */
+      font-size: 1.5rem;
+      line-height: 1.75;
+      min-width: 64px;
+      transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, border-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+      color: rgb(255, 255, 255);
+      background-color: rgb(246, 32, 121);
+      box-shadow: rgba(0, 0, 0, 0.2) 0px 3px 1px -2px, rgba(0, 0, 0, 0.14) 0px 2px 2px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5px 0px;
+      width: 100%;
+      text-transform: none;
+      border-radius: 500px;
+      font-family: Inter, sans-serif;
+      font-weight: 600;
+      padding: 11px 16px;
+    }
+
+    .accountButton:hover,
+    .buttons button:hover {
+      -moz-box-shadow: none;
+      -webkit-box-shadow: none;
+      box-shadow: none;
+      background-color: #AC1654;
+      border-color: #AC1654
+    }
+
+    @media only screen and (max-width:600px) {
+      img[data-tenant-branding-background=true] {
+        display: none
+      }
+
+      .container {
+        background-color: #fff
+      }
+
+      .container .row .panel-default {
+        border-radius: 0;
+        border: none;
+        box-shadow: none
+      }
+    }
+  </style>
+  <style>
+    .buttons button:hover {
+      background-image: none
+    }
+
+    .phonefactor_container .row .panel-default {
+      padding: 40px 30px;
+      margin: auto;
+      height: 100%;
+      background-color: white;
+      border: 1px solid #dee2e6 !important;
+      border-radius: 16px !important;
+      /* padding: 30px 120px; */
+    }
+
+    .phonefactor_container .row .panel-body {
+      margin: 0 auto;
+      max-width: 400px;
+      width: auto;
+      /* padding: 4.2rem 1rem */
+      padding: 0
+    }
+
+    .phonefactor_container .row .panel-body img {
+      height: 70px;
+      margin: 0 auto
+    }
+
+    .accountButton,
+    .buttons button {
+      width: 60%;
+      height: 50px
+    }
+
+    button#verifyCode {
+      /* background-color: #296ec6 !important;
+      margin-top: 2rem;
+      border-radius: .5rem;
+      color: #fff */
+    }
+
+    button#verifyCode:hover {
+      /* background-color: #1662c7 !important */
+    }
+
+    button#verifyPhone {
+      background-color: #296ec6 !important;
+      border-radius: .5rem;
+      color: #fff
+    }
+
+    button#verifyPhone:hover {
+      background-color: #1662c7 !important
+    }
+
+    #api #codeVerification {
+      text-align: left;
+      margin-top: 1rem
+    }
+
+    #api .working {
+      display: none
+    }
+
+    #codeVerification #verificationCode {
+      border-radius: .5rem;
+      width: 100%;
+      height: 50px;
+      border: none;
+      text-indent: 20px;
+      box-shadow: 0 2px 10px rgba(0, 0, 150, .15);
+      outline: 0
+    }
+
+    #codeVerification #retryCode {
+      cursor: pointer;
+      color: #337ab7;
+      text-decoration: none
+    }
+
+    #codeVerification #retryCode:hover {
+      text-decoration: underline
+    }
+
+    #codeVerification .error.itemLevel p {
+      color: #d30000
+    }
+
+    #api #phonefactor_initial .intro p {
+      text-align: left
+    }
+
+    #api p {
+      text-align: left;
+      margin-top: 1rem
+    }
+
+    #api .intro p {
+      margin-top: 20px
+    }
+
+    #api #phoneEntry.phoneEntry {
+      margin-top: 10px
+    }
+
+    #api #phoneEntry.phoneEntry .input .code {
+      text-align: left
+    }
+
+    #api #phoneEntry .input .code #countryCode {
+      height: 50px;
+      /* border-radius: .5rem; */
+      border-radius: 8px;
+      width: 100%;
+      margin-bottom: 15px;
+      padding-left: 15px;
+      box-shadow: none
+        /* box-shadow: 0 2px 10px rgba(0, 0, 150, .15) */
+    }
+
+    #api #phoneEntry .input .error.itemLevel p {
+      color: #d30000
+    }
+
+    #api #phoneEntry.phoneEntry .input .number {
+      text-align: left
+    }
+
+    #api #phoneEntry.phoneEntry .input .number #number {
+      width: 100%;
+      height: 50px;
+      border-radius: 8px;
+      position: relative;
+      background-color: rgb(255, 255, 255);
+      border: 0.5px solid rgb(206, 212, 218);
+      font-size: 16px;
+      padding: 11px 12px;
+      transition: border-color 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, background-color 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+
+    }
+
+    #api #phonefactor_initial #phoneEntry select#countryCode {
+      height: 45px;
+      border-radius: .5rem;
+      width: 100%;
+      margin-bottom: 15px;
+      padding-left: 15px;
+      /* box-shadow: 0 2px 10px rgba(0, 0, 150, .15) */
+    }
+
+    #api #phonefactor_initial #phoneEntry input#localNumber {
+      border-radius: .5rem;
+      width: 100%;
+      height: 50px;
+      border: none;
+      text-indent: 20px;
+      box-shadow: 0 2px 10px rgba(0, 0, 150, .15);
+      outline: 0
+    }
+
+    .phoneNumbers .phoneNumber .displayName,
+    .phoneNumbers .phoneNumber .type {
+      display: none
+    }
+
+    .phoneNumbers .phoneNumber .number,
+    .phoneNumbers .phoneNumber label[for="1"] {
+      margin-top: 10px
+    }
+
+    input#verificationCode {
+      border: solid !important;
+      width: 80% !important;
+      margin-left: 20px !important;
+    }
+
+    #codeVerification #verificationCode {
+      width: 80%;
+      border: solid;
+    }
+
+    .StepTitle {
+      margin-top: 15px;
+      max-width: 339px;
+
+      font-family: "Inter", sans-serif;
+      font-style: normal;
+      font-weight: 400;
+      font-size: 24px;
+      line-height: 120%;
+      text-align: left;
+      margin-bottom: 5rem;
+
+      /* or 29px */
+      color: #292929;
+      /* Inside auto layout */
+      flex: none;
+      order: 0;
+      flex-grow: 0;
+    }
+
+    .title {
+      font-weight: 700 !important;
+      font-size: 24px !important;
+      color: #292929;
+      margin-bottom: 10px;
+
+      @media(min-width: 1024px) {
+        font-size: 32px !important;
+      }
+    }
+
+    .content {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .steps {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 8px 0;
+      width: 100%;
+    }
+
+    .mobile-stepper-root {
+      width: 100%;
+      display: grid !important;
+      grid-column-gap: 8px;
+      grid-template-columns: repeat(4, 1fr);
+      /* valor padrão */
+    }
+
+    .mobile-stepper-dot {
+      border-radius: 500px;
+      transition: background-color 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+      background-color: rgba(0, 0, 0, 0.26);
+      /* border-radius: 50%; */
+      width: 100%;
+      height: 8px;
+      margin: 0px 2px;
+    }
+
+    .mobile-stepper-dot-selected {
+      border-radius: 500px;
+      transition: background-color 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+      background-color: rgba(0, 0, 0, 0.26);
+      /* border-radius: 50%; */
+      width: 100%;
+      height: 8px;
+      margin: 0px 2px;
+      background-color: rgba(246, 32, 121);
+    }
+
+    .content-steps {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      align-content: center;
+      flex-wrap: nowrap;
+    }
+
+    .LabelError {
+      color: #EA1F1F;
+      font-weight: 400;
+      font-size: 14px;
+      margin: 4px 0 0;
+      display: none;
+    }
+
+    p {
+      display: none;
+    }
+
+    .readonly {
+      display: none !important;
+    }
+
+    .disableButton {
+      pointer-events: none !important;
+      opacity: 0.5; /* opcional: diminui a opacidade do botão para indicar que está desabilitado */
+      background-color: rgba(195, 195, 196, 0.16) !important;
+      color: rgba(41, 41, 41, 0.32) !important
+    }
+  </style>
+
+</head>
+
+<body>
+  <!-- <img data-tenant-branding-background="true"
+    src="https://acheidentitydev.b2clogin.com/static/tenant/templates/backgrounds/1-1.png" /> -->
+
+  <div class="container  phonefactor_container ">
+    <div class="row">
+      <div class="col-lg-6">
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <h4 class="title">Inscreva-se</h4>
+            <div class="content">
+              <div class="steps">
+                <div class="mobile-stepper-root">
+                  <div id="cpfStep" class="mobile-stepper-dot"></div>
+                  <div id="dataDeNascimentoStep" class="mobile-stepper-dot"></div>
+                  <div id="nomeStep" class="mobile-stepper-dot"></div>
+                  <div id="phoneFactor" class="mobile-stepper-dot-selected"></div>
+                </div>
+              </div>
+            </div>
+
+            <div id="StepTitle" class="StepTitle"></div>
+
+            <div id="api"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    console.log('init javascript...');
+    var verCode = document.getElementById("verificationCode");
+    if (null != verCode) {
+      console.log('modifying object verificationCode');
+      verCode.setAttribute("autocomplete", "one-time-code");
+      verCode.setAttribute("inputmode", "numeric");
+    }
+    var verPhone = document.getElementById("verifyPhone");
+    if (null != verPhone) {
+      console.log('modifying object verifyPhone');
+      verPhone.parentNode.removeChild(verPhone);
+    }
+    var introText = document.getElementById('api').getElementsByTagName('P')[0];
+    if (null != introText) {
+      console.log('modifying object verifyCode');
+      document.getElementById("verifyCode").setAttribute("aria-label", introText.innerHTML);
+    }
+    function verifyCodeTimer() {
+      setTimeout(function () {
+        if (verCode.value.length >= parseInt(verCode.getAttribute("maxlength"))) {
+          document.getElementById("verifyCode").click();
+        } else {
+          verifyCodeTimer();
+        }
+      }, 1000);
+    }
+
+    
+    var buttonSendCode = document.getElementById("sendCode")
+    const titleStep = document.getElementById("StepTitle")
+    var inputNumber = document.getElementById("number");
+
+    function formatPhoneNumber(value) {
+      // Remove tudo que não for número
+      let phoneNumber = value.replace(/\D/g, '');
+      phoneNumber = phoneNumber.slice(0, 11);
+
+      // Adiciona os parênteses e o hífen
+      phoneNumber = phoneNumber.replace(/^(\d{2})(\d)/g, '($1) $2');
+      phoneNumber = phoneNumber.replace(/(\d)(\d{4})$/, '$1-$2');
+
+      // Define o novo valor do campo
+      return phoneNumber;
+    }
+
+    function continueToVerifyCode(phoneNumber) {
+      if (!phoneNumber) {
+        buttonSendCode.classList.add("disableButton")
+       
+        inputNumber.classList.add("inputInvalid")
+      }
+      else {
+        buttonSendCode.classList.remove("disableButton")
+        inputNumber.classList.remove("inputInvalid")
+
+      }
+    }
+
+    function handleStepPhoneNumber() {
+
+      titleStep.innerText = "Falta pouco para concluir o seu cadastro"
+      inputNumber.placeholder = "Ex. (99) 99123-4567";
+
+      inputNumber.addEventListener('input', () => {
+        inputNumber.value = formatPhoneNumber(inputNumber.value);
+        continueToVerifyCode(!(inputNumber.value.length < 15))
+      });
+    }
+
+    function handleStepVerifyCode(numberPhone) {
+
+      const ddd = numberPhone.substring(0, 4)
+      const lastNumbers = numberPhone.substring(10, numberPhone.length)
+      titleStep.innerText = `Insira o código de verificação enviado para ${ddd} *****${lastNumbers}`
+
+    }
+
+    buttonSendCode.addEventListener("click", async function () {
+      verifyCodeTimer();
+      handleStepVerifyCode(inputNumber.value)
+    });
+    // troca de texto do botão enviar código para próximo
+    buttonSendCode.textContent = "Próximo";
+
+    handleStepPhoneNumber()
+  </script>
+</body>
+
+</html>
