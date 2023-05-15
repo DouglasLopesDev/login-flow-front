@@ -112,7 +112,7 @@
             height: 100%;
             width: 100%;
             margin: 0;
-            display: table-cell; 
+            display: table-cell;
             vertical-align: middle;
             /* código para centralizar a div principal */
             display: flex;
@@ -1113,7 +1113,7 @@
         }
 
         var inputCPF = document.getElementById("signInNames.userName");
-        const stepTitle = document.querySelector('#StepTitle');
+        var stepTitle = document.querySelector('#StepTitle');
         var inputNome = document.getElementById("nome");
         var inputDataDeNascimento = document.getElementById("dataDeNascimento");
 
@@ -1125,7 +1125,6 @@
         var buttonContinue = document.getElementById("continue")
         if (buttonContinue != null) {
             buttonContinue.textContent = "Próximo";
-            // if(inputCPF.offsetParent !== null) buttonContinue.disabled = true
         }
 
         function continueToDataDeNascimento(validCpfValue) {
@@ -1142,22 +1141,40 @@
             }
         }
 
+        function handleStepField(fieldInput, placeholder, innerText) {
+            fieldInput.placeholder = placeholder;
+            fieldInput.innerText = innerText;
+
+
+        }
+
+        function addLabelErrorAfterend(errorText, afterTo) {
+
+            var labelError = document.createElement("p")
+            labelError.innerText = errorText
+            labelError.classList.add("LabelError")
+            afterTo.insertAdjacentElement('afterend', labelError);
+
+        }
+
         // tratamentos relacionados ao campo cpf
         if (inputCPF != null) {
             if (inputCPF.offsetParent !== null) {
                 // customização do placeholder
-                inputCPF.placeholder = "Ex. 123.456.789-01";
+                // inputCPF.placeholder = "Ex. 123.456.789-01";
 
-                document.getElementById("cpfStep").classList.add("mobile-stepper-dot-selected") 
+                //TODO CRIAR FUNÇÃO PARA O STEPPER
+                document.getElementById("cpfStep").classList.add("mobile-stepper-dot-selected")
 
                 // inclusão de texto acima do CPF somente quando ele aparecer
-                stepTitle.innerText = "Por favor, digite seu CPF para iniciar o cadastro.";
-                
+                // stepTitle.innerText = "Por favor, digite seu CPF para iniciar o cadastro.";
+
+
+                handleStepField(inputCPF, "Ex. 123.456.789-01", "Por favor, digite seu CPF para iniciar o cadastro.")
+
                 //Label error
-                var labelErrorCPF = document.createElement("p")
-                labelErrorCPF.innerText = "O número de CPF parece não estar correto"
-                labelErrorCPF.classList.add("LabelError")
-                inputCPF.insertAdjacentElement('afterend', labelErrorCPF);
+                addLabelErrorAfterend("O número de CPF parece não estar correto", inputCPF)
+
 
                 //Função que verifica se há erros no CPF
                 inputCPF.addEventListener('input', () => {
@@ -1173,10 +1190,11 @@
         if (inputNome != null) {
             if (inputNome.offsetParent !== null) {
                 inputNome.placeholder = "Ex. João da Silva";
-                stepTitle.innerText = "Digite seu nome completo.";
-                
-                dataDeNascimentoStep.classList.remove("mobile-stepper-dot-selected") 
-                nomeStep.classList.add("mobile-stepper-dot-selected") 
+                // stepTitle.innerText = "Digite seu nome completo.";
+                stepTitle.innerText = "Falta pouco para concluir seu cadastro";
+
+                dataDeNascimentoStep.classList.remove("mobile-stepper-dot-selected")
+                nomeStep.classList.add("mobile-stepper-dot-selected")
 
 
             }
@@ -1187,8 +1205,8 @@
             if (inputDataDeNascimento.offsetParent !== null) {
                 // inclusão de texto acima da data de nascimento somente quando ele aparecer
                 stepTitle.innerText = "Agora, digite sua data de nascimento para continuar.";
-                cpfStep.classList.remove("mobile-stepper-dot-selected") 
-                dataDeNascimentoStep.classList.add("mobile-stepper-dot-selected") 
+                cpfStep.classList.remove("mobile-stepper-dot-selected")
+                dataDeNascimentoStep.classList.add("mobile-stepper-dot-selected")
             }
         }
 
