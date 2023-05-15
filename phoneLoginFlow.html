@@ -1,28 +1,3 @@
-<!-- <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
-    <meta
-      name="description"
-      content="Web site created using create-react-app"
-    />
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
-
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    
-    <title>React App</title>
-  </head>
-  <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
-    
-  </body>
-</html> -->
-
-
 <!DOCTYPE html>
 <html>
 
@@ -1202,6 +1177,8 @@
 
       titleStep.innerText = "Falta pouco para concluir o seu cadastro"
       inputNumber.placeholder = "Ex. (99) 99123-4567";
+
+      if(inputNumber.value.length === 0) buttonSendCode.classList.add("disableButton")
 
       inputNumber.addEventListener('input', () => {
         inputNumber.value = formatPhoneNumber(inputNumber.value);
