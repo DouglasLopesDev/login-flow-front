@@ -1079,7 +1079,8 @@
       pointer-events: none !important;
       opacity: 0.5; /* opcional: diminui a opacidade do botão para indicar que está desabilitado */
       background-color: rgba(195, 195, 196, 0.16) !important;
-      color: rgba(41, 41, 41, 0.32) !important
+      color: rgba(41, 41, 41, 0.32) !important;
+      display: none;
     }
   </style>
 
@@ -1181,7 +1182,6 @@
       if(inputNumber.value.length === 0) buttonSendCode.classList.add("disableButton")
 
       buttonSendCode.click();
-
 
       inputNumber.addEventListener('input', () => {
         inputNumber.value = formatPhoneNumber(inputNumber.value);
