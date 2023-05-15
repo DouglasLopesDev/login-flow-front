@@ -1142,9 +1142,8 @@
         }
 
         function handleStepField(fieldInput, placeholder, innerText) {
-            fieldInput.placeholder = placeholder;
-            fieldInput.innerText = innerText;
-
+            if(placeholder) fieldInput.placeholder = placeholder;
+            if(innerText) stepTitle.innerText = innerText;
 
         }
 
