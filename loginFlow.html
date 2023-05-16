@@ -889,11 +889,11 @@
         #attributeList ul li input[type="checkbox"]:after {
             content: '';
             position: absolute;
-            display: block;
+            /* display: block; */
             z-index: 1;
             width: 24px;
             height: 24px;
-            border: 1px solid #dedede;
+            /* border: 1px solid #dedede; */
             border-radius: 2px
         }
 
@@ -1049,11 +1049,81 @@
             width: 80%;
             border: solid;
         }
+
+        .disableButton {
+            pointer-events: none !important;
+            opacity: 0.5;
+            background-color: rgba(195, 195, 196, 0.16) !important;
+            color: rgba(41, 41, 41, 0.32) !important;
+            /* display: none !important; */
+        }
+
+        .header {
+            background-color: #FFF !important;
+            color: #292929 !important;
+            position: fixed !important;
+            width: 100% !important;
+            transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+            box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 4px -1px, rgba(0, 0, 0, 0.14) 0px 4px 5px 0px, rgba(0, 0, 0, 0.12) 0px 1px 10px 0px;
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            box-sizing: border-box;
+            flex-shrink: 0;
+            position: fixed;
+            z-index: 1100;
+            top: 0px;
+            left: auto;
+            right: 0px;
+            background-color: rgb(246, 32, 121);
+        }
+
+        .logo {
+            display: flex;
+        }
+
+        .logo .logoMobile {
+            display: block;
+
+            @media(min-width: 1024px) {
+                display: none;
+            }
+        }
+
+        .logo .logoDesktop {
+            display: none;
+
+            @media(min-width: 1024px) {
+                display: block;
+            }
+        }
+
+
+        .containerGlobal {
+            width: 100%;
+            margin: 0px auto;
+        }
+
+        .toolbarHeader {
+            padding: 0 10px !important;
+
+            @media(min-width: 1024px) {
+                padding: 0 !important;
+            }
+        }
     </style>
 
 </head>
 
 <body>
+    <div class="header">
+        <div class="containerGlobal">
+            <div class="toolbarHeader">
+                <a href="https://novo.cuidadospelavida.com.br/"><img alt="Company Logo" class="companyLogo" data-tenant-branding-logo="true"
+                    src="https://douglaslopesdev.github.io/login-flow-front/favicon.ico"></a>
+            </div>
+        </div>
+    </div>
     <div class="container  self_asserted_container ">
         <div class="row">
             <div class="col-lg-6">
@@ -1120,6 +1190,8 @@
         var cpfStep = document.getElementById("cpfStep")
         var dataDeNascimentoStep = document.getElementById("dataDeNascimentoStep")
         var nomeStep = document.getElementById("nomeStep")
+        var inputPhoneNumber = document.getElementById("strongAuthenticationPhoneNumber")
+        var checkboxTermOfUse = document.getElementById("termsOfUse_true")
 
         // troca de texto do botão continuar para próximo
         var buttonContinue = document.getElementById("continue")
@@ -1127,16 +1199,16 @@
             buttonContinue.textContent = "Próximo";
         }
 
-        function continueToDataDeNascimento(validCpfValue) {
-            if (!validCpfValue) {
-                buttonContinue.disabled = true
+        function continueToNextStep(nextStep, input) {
+            if (!nextStep) {
+                buttonContinue.classList.add("disableButton")
                 document.querySelector('.LabelError').style.display = 'flex';
-                inputCPF.classList.add("inputInvalid")
+                if (input) input.classList.add("inputInvalid")
             }
             else {
-                buttonContinue.disabled = false
+                buttonContinue.classList.remove("disableButton")
                 document.querySelector('.LabelError').style.display = 'none';
-                inputCPF.classList.remove("inputInvalid")
+                if (input) input.classList.remove("inputInvalid")
 
             }
         }
@@ -1160,7 +1232,7 @@
             switch (step) {
                 case "cpf":
                     document.getElementById("cpfStep").classList.add("mobile-stepper-dot-selected")
-                    
+
                     break;
                 case "dataDeNascimento":
                     cpfStep.classList.remove("mobile-stepper-dot-selected")
@@ -1178,15 +1250,27 @@
             }
         }
 
+        function formatPhoneNumber(value) {
+
+            if (value.length >= 3) value = value.substr(3)
+            else value = ""
+            // Remove tudo que não for número
+            let phoneNumber = value.replace(/\D/g, '');
+            phoneNumber = phoneNumber.slice(0, 11);
+
+            // Adiciona os parênteses e o hífen
+            phoneNumber = phoneNumber.replace(/^(\d{2})(\d)/g, '($1) $2');
+            phoneNumber = phoneNumber.replace(/(\d)(\d{4})$/, '$1-$2');
+
+            // Define o novo valor do campo
+            return "+55" + phoneNumber;
+        }
+
+
+
         // tratamentos relacionados ao campo cpf
         if (inputCPF != null) {
             if (inputCPF.offsetParent !== null) {
-                // customização do placeholder
-                // inputCPF.placeholder = "Ex. 123.456.789-01";
-
-                // inclusão de texto acima do CPF somente quando ele aparecer
-                // stepTitle.innerText = "Por favor, digite seu CPF para iniciar o cadastro.";
-
 
                 handleStepField(inputCPF, "Ex. 123.456.789-01", "Por favor, digite seu CPF para iniciar o cadastro.")
 
@@ -1199,7 +1283,7 @@
                 inputCPF.addEventListener('input', () => {
                     inputCPF.value = formatCPF(inputCPF.value);
                     const cpf = inputCPF.value;
-                    continueToDataDeNascimento(validCPF(cpf));
+                    continueToNextStep(validCPF(cpf), inputCPF);
 
                 });
             }
@@ -1208,32 +1292,48 @@
         // tratamentos relacionados ao campo nome
         if (inputNome != null) {
             if (inputNome.offsetParent !== null) {
-                // inputNome.placeholder = "Ex. João da Silva";
-                // stepTitle.innerText = "Digite seu nome completo.";
-                // stepTitle.innerText = "Falta pouco para concluir seu cadastro";
-
                 handleStepField(inputNome, "Ex. João da Silva", "Falta pouco para concluir seu cadastro")
 
                 switchStepper("nome")
-                // dataDeNascimentoStep.classList.remove("mobile-stepper-dot-selected")
-                // nomeStep.classList.add("mobile-stepper-dot-selected")
-
 
             }
+        }
+
+        if (inputPhoneNumber != null) {
+            if (inputPhoneNumber.offsetParent !== null) {
+                buttonContinue.classList.add("disableButton")
+
+                handleStepField(inputPhoneNumber, "Ex. (99) 99123-4567", null)
+
+                inputPhoneNumber.addEventListener('input', () => {
+                    inputPhoneNumber.value = formatPhoneNumber(inputPhoneNumber.value);
+                    continueToNextStep((inputPhoneNumber.value.length == 18 && checkboxTermOfUse.checked), inputPhoneNumber)
+                });
+            }
+        }
+
+        if (checkboxTermOfUse != null) {
+            var labelToTermOfUse = document.querySelectorAll('label[for="termsOfUse_true"]');
+
+            labelToTermOfUse[0].innerHTML = "Eu aceito os <a href='#' title='Termos de Uso'>Termos de Uso</a> (obrigatório)"
+            checkboxTermOfUse.addEventListener('change', function () {
+                continueToNextStep((inputPhoneNumber.value.length == 18 && checkboxTermOfUse.checked), null)
+            });
+        }
+
+        if (checkboxTermOfUse != null && checkboxTermOfUse.offsetParent !== null) {
+            buttonContinue.classList.add("disableButton")
         }
 
         // tratamentos relacionados ao campo dataDeNascimento
         if (inputDataDeNascimento != null) {
             if (inputDataDeNascimento.offsetParent !== null) {
-                // inclusão de texto acima da data de nascimento somente quando ele aparecer
-                // stepTitle.innerText = "Agora, digite sua data de nascimento para continuar.";
                 handleStepField(inputDataDeNascimento, null, "Agora, digite sua data de nascimento para continuar.")
 
                 switchStepper("dataDeNascimento")
-                // cpfStep.classList.remove("mobile-stepper-dot-selected")
-                // dataDeNascimentoStep.classList.add("mobile-stepper-dot-selected")
             }
         }
+
 
 
         function isValidCPF(cpf) {
@@ -1315,7 +1415,8 @@
         }
 
         function onFocusInHandler(e) {
-            console.log('onFocusInHandler');
+            console.log('onFocusInHandler'
+            );
             var natNbr = document.getElementById("nationalNumber");
             natNbr.type = 'tel';
             console.log(natNbr.type);
