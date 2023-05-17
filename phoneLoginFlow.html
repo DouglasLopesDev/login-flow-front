@@ -121,7 +121,7 @@
     .row {
       width: 100%;
       margin: 0;
-      display: table-cell;
+      /* display: table-cell; */
       vertical-align: middle
     }
 
@@ -1082,6 +1082,194 @@
       color: rgba(41, 41, 41, 0.32) !important;
       /* display: none !important; */
     }
+
+    .header {
+      background-color: #FFF !important;
+      color: #292929 !important;
+      width: 100% !important;
+      transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+      box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 4px -1px, rgba(0, 0, 0, 0.14) 0px 4px 5px 0px, rgba(0, 0, 0, 0.12) 0px 1px 10px 0px;
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      box-sizing: border-box;
+      flex-shrink: 0;
+      position: fixed;
+      z-index: 1100;
+      top: 0px;
+      left: auto;
+      right: 0px;
+      background-color: rgb(246, 32, 121);
+    }
+
+    .logoDesktop {
+      display: none;
+      flex-grow: 1;
+    }
+
+    .logoMobile {
+      display: flex;
+    }
+
+    @media screen and (min-width: 900px) {
+      .logoDesktop {
+        display: flex !important;
+
+      }
+
+      .logoMobile {
+        display: none !important;
+      }
+
+    }
+
+    .containerGlobal {
+      width: 100%;
+      margin: 0px auto;
+    }
+
+    .toolbarHeader {
+      display: flex;
+      position: relative;
+      -webkit-box-align: center;
+      align-items: center;
+      padding-left: 16px;
+      padding-right: 16px;
+      min-height: 56px;
+
+
+      @media(min-width: 1024px) {
+        padding: 0 !important;
+      }
+    }
+
+
+    @media screen and (min-width: 900px) {
+      .contentMenu {
+        -webkit-box-flex: 1;
+        flex-grow: 1;
+        display: initial !important;
+      }
+
+      .drawer-button {
+        display: none;
+      }
+    }
+
+
+    .contentMenu {
+      display: none;
+    }
+
+    .Menu {
+      list-style: none;
+      float: left;
+      margin: 0;
+      padding: 0;
+      height: 64px;
+    }
+
+    .Menu a {
+      text-decoration: none !important;
+      color: #292929 !important;
+      background: transparent !important;
+      text-shadow: none !important;
+      box-shadow: none !important;
+    }
+
+    .Menu li {
+      padding: 22px 0;
+      position: relative;
+      float: left;
+      margin: 0 20px;
+      cursor: pointer;
+      color: #292929;
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 150%;
+      letter-spacing: 0.01em;
+
+    }
+
+    .Menu li span {
+      display: flex;
+      align-items: center;
+    }
+
+    .Menu a:hover {
+      background: #333;
+      color: #fff;
+      -moz-box-shadow: 0 3px 10px 0 #CCC;
+      -webkit-box-shadow: 0 3px 10px 0 #ccc;
+      text-shadow: 0px 0px 5px #fff;
+    }
+
+
+    /* Estilos básicos para o Drawer Menu */
+    .drawer-container {
+      position: relative;
+    }
+
+    .drawer-button {
+      /* position: fixed; */
+      top: 20px;
+      left: 20px;
+      font-size: 24px;
+      cursor: pointer;
+      z-index: 999;
+    }
+
+    .drawer-menu {
+      position: fixed;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100vh;
+      background-color: #f1f1f1;
+      transition: left 0.3s ease;
+      z-index: 998;
+      display: flex;
+      box-shadow: 0px 0.6px 1.8px rgba(0, 0, 0, 0.11), 0px 3.2px 7.2px rgba(0, 0, 0, 0.13);
+      padding: 14px 15px;
+      z-index: 1;
+    }
+
+    .drawer-menu img {
+      display: block;
+    }
+
+    .drawer-menu button {
+      margin-left: auto;
+    }
+
+    .drawer-menu button svg {
+      color: #1C274C;
+      font-size: 21px;
+    }
+
+
+
+    .drawer-menu ul {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    .drawer-menu ul li {
+      padding: 10px;
+    }
+
+    .drawer-menu ul li a {
+      text-decoration: none;
+      color: #333;
+    }
+
+    .main-content {
+      width: 100%;
+      margin-left: 100%;
+      /* Largura do menu */
+      padding: 20px;
+      transition: margin-left 0.3s ease;
+    }
   </style>
 
 </head>
@@ -1092,6 +1280,43 @@
 
   <div class="container  phonefactor_container ">
     <div class="row">
+      <div class="header">
+        <div class="containerGlobal">
+          <div class="toolbarHeader">
+            <div style="display: flex;">
+              <input type="checkbox" id="drawer-toggle" style="display: none;">
+              <label for="drawer-toggle" class="drawer-button">&#9776;</label>
+              <nav class="drawer-menu">
+                <ul>
+                  <li><span>Para Pacientes</span></li>
+                  <li><a href='http://achedoc.ache.com.br'>Para Profissionais de Saúde</a></li>
+                  <li><a href='http://farmacias.cuidadospelavida.com.br'>Para seu negócio</a></li>
+                </ul>
+              </nav>
+            </div>
+            <div class="logoDesktop">
+              <a href="https://novo.cuidadospelavida.com.br/">
+                <img alt="Company Logo" class="companyLogo" data-tenant-branding-logo="true"
+                  src="https://douglaslopesdev.github.io/login-flow-front/header-logo-desktop.c58e89f4.png">
+              </a>
+            </div>
+            <div class="logoMobile">
+              <a href="https://novo.cuidadospelavida.com.br/">
+                <img alt="Company Logo" class="companyLogo" data-tenant-branding-logo="true"
+                  src="https://douglaslopesdev.github.io/login-flow-front/header-logo-mobile.73ab4d9f.png">
+              </a>
+            </div>
+            <div class="contentMenu">
+              <ul class="Menu">
+                <li><span>Para Pacientes</span></li>
+                <li><a href='http://achedoc.ache.com.br'>Para Profissionais de Saúde</a></li>
+                <li><a href='http://farmacias.cuidadospelavida.com.br'>Para seu negócio</a></li>
+              </ul>
+            </div>
+
+          </div>
+        </div>
+      </div>
       <div class="col-lg-6">
         <div class="panel panel-default">
           <div class="panel-body">
@@ -1117,6 +1342,23 @@
   </div>
   <script>
     console.log('init javascript...');
+
+
+    var drawerToggle = document.getElementById('drawer-toggle');
+    var drawerMenu = document.querySelector('.drawer-menu');
+    var mainContent = document.querySelector('.main-content');
+
+    drawerToggle.addEventListener('change', function () {
+      if (drawerToggle.checked) {
+        drawerMenu.style.left = '0'; // Mostra o menu
+        mainContent.style.marginLeft = "100%"; // Desloca o conteúdo principal para a direita
+      } else {
+        drawerMenu.style.left = '-100%'; // Esconde o menu
+        mainContent.style.marginLeft = '0'; // Reposiciona o conteúdo principal
+      }
+    });
+
+
     var verCode = document.getElementById("verificationCode");
     if (null != verCode) {
       console.log('modifying object verificationCode');
