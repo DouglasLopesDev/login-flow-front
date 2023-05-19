@@ -1393,7 +1393,7 @@
 
         function handleStepField(fieldInput, placeholder, innerText) {
             if (placeholder) fieldInput.placeholder = placeholder;
-            if (innerText) stepTitle.innerText = innerText;
+            if (innerText) stepTitle.innerHTML = innerText;
 
         }
 
@@ -1467,16 +1467,6 @@
             }
         }
 
-        // tratamentos relacionados ao campo nome
-        if (inputNome != null) {
-            if (inputNome.offsetParent !== null) {
-                handleStepField(inputNome, "Ex. João da Silva", "Falta pouco para concluir seu cadastro")
-
-                switchStepper("nome")
-
-            }
-        }
-
         if (inputPhoneNumber != null) {
             if (inputPhoneNumber.offsetParent !== null) {
                 buttonContinue.classList.add("disableButton")
@@ -1487,6 +1477,35 @@
                     inputPhoneNumber.value = formatPhoneNumber(inputPhoneNumber.value);
                     continueToNextStep((inputPhoneNumber.value.length == 18 && checkboxTermOfUse.checked), inputPhoneNumber)
                 });
+            }
+        }
+
+        // tratamentos relacionados ao campo nome
+        if (inputNome != null) {
+            if (inputNome.offsetParent !== null) {
+
+                var nameToMessageSignIn = document.getElementById("nameToMessageSignIn")
+                var stepsMessage = "Falta pouco para concluir seu cadastro"
+                
+                if(nameToMessageSignIn != null && nameToMessageSignIn.offsetParent !== null){
+                    stepsMessage = "Preencha o número do seu celular cadastrado "+ inputPhoneNumber.value.substring(0, 7) +" *****-"+inputPhoneNumber.value.substring(14, inputPhoneNumber.value.lenght)+". Assim, enviaremos um código de verificação."
+                    console.log("valor", inputPhoneNumber.value.substring(0, 7))
+                    console.log("final", inputPhoneNumber.value.substring(14, inputPhoneNumber.value.lenght))
+                    nameToMessageSignIn.style.display = 'none'
+
+                    document.getElementById("displayName_label").style.display = 'none'
+                    document.getElementById("displayName").style.display = 'none'
+                    var phoneNumberToStepsMessage = inputPhoneNumber.value
+
+
+                    inputPhoneNumber.value = ""
+
+                }
+
+                handleStepField(inputNome, "Ex. João da Silva", stepsMessage)
+
+                switchStepper("nome")
+
             }
         }
 
@@ -1506,7 +1525,15 @@
         // tratamentos relacionados ao campo dataDeNascimento
         if (inputDataDeNascimento != null) {
             if (inputDataDeNascimento.offsetParent !== null) {
-                handleStepField(inputDataDeNascimento, null, "Agora, digite sua data de nascimento para continuar.")
+                var stepsMessage =  "Agora, digite sua data de nascimento para continuar."
+                var nameToMessageSignIn = document.getElementById("nameToMessageSignIn")
+                
+                if(nameToMessageSignIn != null && nameToMessageSignIn.offsetParent !== null){
+                    stepsMessage = "Olá, <b>" + nameToMessageSignIn.value + "!</b> Encontramos o seu cadastro. Agora, confirme a sua data de nascimento."
+                    nameToMessageSignIn.style.display = 'none'
+                }
+                    
+                handleStepField(inputDataDeNascimento, null, stepsMessage)
 
                 switchStepper("dataDeNascimento")
             }
