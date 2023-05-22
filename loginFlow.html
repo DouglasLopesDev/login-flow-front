@@ -1489,9 +1489,6 @@
                 
                 if(nameToMessageSignIn != null && nameToMessageSignIn.offsetParent !== null && nameToMessageSignIn.value){
                     stepsMessage = "Preencha o número do seu celular cadastrado "+ inputPhoneNumber.value.substring(0, 7) +" *****-"+inputPhoneNumber.value.substring(14, inputPhoneNumber.value.lenght)+". Assim, enviaremos um código de verificação."
-                    console.log("valor", inputPhoneNumber.value.substring(0, 7))
-                    console.log("final", inputPhoneNumber.value.substring(14, inputPhoneNumber.value.lenght))
-                    nameToMessageSignIn.style.display = 'none'
 
                     document.getElementById("displayName_label").style.display = 'none'
                     document.getElementById("displayName").style.display = 'none'
@@ -1501,6 +1498,8 @@
                     inputPhoneNumber.value = ""
 
                 }
+                nameToMessageSignIn.style.display = 'none'
+
 
                 handleStepField(inputNome, "Ex. João da Silva", stepsMessage)
 
@@ -1529,10 +1528,10 @@
                 var nameToMessageSignIn = document.getElementById("displayNameRegistered")
                 
                 if(nameToMessageSignIn != null && nameToMessageSignIn.offsetParent !== null && nameToMessageSignIn.value){
-                    console.log("nameToMessageSignIn.value", nameToMessageSignIn.value)
                     stepsMessage = "Olá, <b>" + nameToMessageSignIn.value + "!</b> Encontramos o seu cadastro. Agora, confirme a sua data de nascimento."
-                    nameToMessageSignIn.style.display = 'none'
                 }
+                nameToMessageSignIn.style.display = 'none'
+
                     
                 handleStepField(inputDataDeNascimento, null, stepsMessage)
 
