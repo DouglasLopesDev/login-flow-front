@@ -1484,7 +1484,7 @@
         if (inputNome != null) {
             if (inputNome.offsetParent !== null) {
 
-                var nameToMessageSignIn = document.getElementById("nameToMessageSignIn")
+                var nameToMessageSignIn = document.getElementById("displayNameRegistered")
                 var stepsMessage = "Falta pouco para concluir seu cadastro"
                 
                 if(nameToMessageSignIn != null && nameToMessageSignIn.offsetParent !== null){
@@ -1526,7 +1526,7 @@
         if (inputDataDeNascimento != null) {
             if (inputDataDeNascimento.offsetParent !== null) {
                 var stepsMessage =  "Agora, digite sua data de nascimento para continuar."
-                var nameToMessageSignIn = document.getElementById("nameToMessageSignIn")
+                var nameToMessageSignIn = document.getElementById("displayNameRegistered")
                 
                 if(nameToMessageSignIn != null && nameToMessageSignIn.offsetParent !== null){
                     stepsMessage = "Olá, <b>" + nameToMessageSignIn.value + "!</b> Encontramos o seu cadastro. Agora, confirme a sua data de nascimento."
