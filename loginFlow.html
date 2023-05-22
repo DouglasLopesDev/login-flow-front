@@ -1529,6 +1529,7 @@
                 var nameToMessageSignIn = document.getElementById("displayNameRegistered")
                 
                 if(nameToMessageSignIn != null && nameToMessageSignIn.offsetParent !== null && nameToMessageSignIn.value){
+                    console.log("nameToMessageSignIn.value", nameToMessageSignIn.value)
                     stepsMessage = "Olá, <b>" + nameToMessageSignIn.value + "!</b> Encontramos o seu cadastro. Agora, confirme a sua data de nascimento."
                     nameToMessageSignIn.style.display = 'none'
                 }
