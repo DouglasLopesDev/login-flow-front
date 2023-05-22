@@ -1487,7 +1487,7 @@
                 var nameToMessageSignIn = document.getElementById("displayNameRegistered")
                 var stepsMessage = "Falta pouco para concluir seu cadastro"
                 
-                if(nameToMessageSignIn != null && nameToMessageSignIn.offsetParent !== null){
+                if(nameToMessageSignIn != null && nameToMessageSignIn.offsetParent !== null && nameToMessageSignIn.value){
                     stepsMessage = "Preencha o número do seu celular cadastrado "+ inputPhoneNumber.value.substring(0, 7) +" *****-"+inputPhoneNumber.value.substring(14, inputPhoneNumber.value.lenght)+". Assim, enviaremos um código de verificação."
                     console.log("valor", inputPhoneNumber.value.substring(0, 7))
                     console.log("final", inputPhoneNumber.value.substring(14, inputPhoneNumber.value.lenght))
@@ -1528,7 +1528,7 @@
                 var stepsMessage =  "Agora, digite sua data de nascimento para continuar."
                 var nameToMessageSignIn = document.getElementById("displayNameRegistered")
                 
-                if(nameToMessageSignIn != null && nameToMessageSignIn.offsetParent !== null){
+                if(nameToMessageSignIn != null && nameToMessageSignIn.offsetParent !== null && nameToMessageSignIn.value){
                     stepsMessage = "Olá, <b>" + nameToMessageSignIn.value + "!</b> Encontramos o seu cadastro. Agora, confirme a sua data de nascimento."
                     nameToMessageSignIn.style.display = 'none'
                 }
