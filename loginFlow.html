@@ -1350,14 +1350,15 @@
         }
 
         function formatCPF(cpf) {
-            cpf = cpf.replace(/\D/g, ''); // Remove todos os caracteres que não são números
-            cpf = cpf.slice(0, 11); // Limita o valor a 11 caracteres
+            return cpf
+            // cpf = cpf.replace(/\D/g, ''); // Remove todos os caracteres que não são números
+            // cpf = cpf.slice(0, 11); // Limita o valor a 11 caracteres
 
-            cpf = cpf.replace(/(\d{3})(\d)/, '$1.$2'); // Adiciona um ponto após os primeiros 3 dígitos
-            cpf = cpf.replace(/(\d{3})(\d)/, '$1.$2'); // Adiciona um ponto após os segundos 3 dígitos
-            cpf = cpf.replace(/(\d{3})(\d{1,2})$/, '$1-$2'); // Adiciona um traço antes dos dois últimos dígitos
+            // cpf = cpf.replace(/(\d{3})(\d)/, '$1.$2'); // Adiciona um ponto após os primeiros 3 dígitos
+            // cpf = cpf.replace(/(\d{3})(\d)/, '$1.$2'); // Adiciona um ponto após os segundos 3 dígitos
+            // cpf = cpf.replace(/(\d{3})(\d{1,2})$/, '$1-$2'); // Adiciona um traço antes dos dois últimos dígitos
 
-            return cpf;
+            // return cpf;
         }
 
         var inputCPF = document.getElementById("signInNames.userName");
