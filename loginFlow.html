@@ -1462,7 +1462,8 @@
                 inputCPF.addEventListener('input', () => {
                     inputCPF.value = formatCPF(inputCPF.value);
                     const cpf = inputCPF.value;
-                    continueToNextStep(validCPF(cpf), inputCPF);
+                    // continueToNextStep(validCPF(cpf), inputCPF);
+                    continueToNextStep(true, inputCPF);
 
                 });
             }
