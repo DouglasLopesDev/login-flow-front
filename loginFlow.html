@@ -1350,15 +1350,14 @@
         }
 
         function formatCPF(cpf) {
-            return cpf
-            // cpf = cpf.replace(/\D/g, ''); // Remove todos os caracteres que não são números
-            // cpf = cpf.slice(0, 11); // Limita o valor a 11 caracteres
+            cpf = cpf.replace(/\D/g, ''); // Remove todos os caracteres que não são números
+            cpf = cpf.slice(0, 11); // Limita o valor a 11 caracteres
 
-            // cpf = cpf.replace(/(\d{3})(\d)/, '$1.$2'); // Adiciona um ponto após os primeiros 3 dígitos
-            // cpf = cpf.replace(/(\d{3})(\d)/, '$1.$2'); // Adiciona um ponto após os segundos 3 dígitos
-            // cpf = cpf.replace(/(\d{3})(\d{1,2})$/, '$1-$2'); // Adiciona um traço antes dos dois últimos dígitos
+            cpf = cpf.replace(/(\d{3})(\d)/, '$1.$2'); // Adiciona um ponto após os primeiros 3 dígitos
+            cpf = cpf.replace(/(\d{3})(\d)/, '$1.$2'); // Adiciona um ponto após os segundos 3 dígitos
+            cpf = cpf.replace(/(\d{3})(\d{1,2})$/, '$1-$2'); // Adiciona um traço antes dos dois últimos dígitos
 
-            // return cpf;
+            return cpf;
         }
 
         var inputCPF = document.getElementById("signInNames.userName");
@@ -1458,14 +1457,13 @@
 
                 switchStepper("cpf")
 
-                //Função que verifica se há erros no CPF
-                // inputCPF.addEventListener('input', () => {
-                //     inputCPF.value = formatCPF(inputCPF.value);
-                //     const cpf = inputCPF.value;
-                //     // continueToNextStep(validCPF(cpf), inputCPF);
-                //     continueToNextStep(true, inputCPF);
+                // Função que verifica se há erros no CPF
+                inputCPF.addEventListener('input', () => {
+                    inputCPF.value = formatCPF(inputCPF.value);
+                    const cpf = inputCPF.value;
+                    continueToNextStep(validCPF(cpf), inputCPF);
 
-                // });
+                });
             }
         }
 
