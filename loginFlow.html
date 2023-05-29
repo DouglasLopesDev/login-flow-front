@@ -782,7 +782,7 @@
         .self_asserted_container .row .panel-default .panel-body #api #attributeVerification .pageLevel {
             color: #b00;
             text-align: left;
-            display: none !important
+            /* display: none !important */
         }
 
         .self_asserted_container .row .panel-default .panel-body #api #attributeVerification .error {
@@ -1370,6 +1370,7 @@
         var nomeStep = document.getElementById("nomeStep")
         var inputPhoneNumber = document.getElementById("strongAuthenticationPhoneNumber")
         var checkboxTermOfUse = document.getElementById("termsOfUse_true")
+        var migrationMessageTitle = document.getElementById("migrationMessageTitle")
 
         // troca de texto do botão continuar para próximo
         var buttonContinue = document.getElementById("continue")
@@ -1408,16 +1409,16 @@
 
         function switchStepper(step) {
             switch (step) {
-                case "cpf":
+                case "step1":
                     document.getElementById("cpfStep").classList.add("mobile-stepper-dot-selected")
 
                     break;
-                case "dataDeNascimento":
+                case "step2":
                     cpfStep.classList.remove("mobile-stepper-dot-selected")
                     dataDeNascimentoStep.classList.add("mobile-stepper-dot-selected")
 
                     break;
-                case "nome":
+                case "step3":
                     dataDeNascimentoStep.classList.remove("mobile-stepper-dot-selected")
                     nomeStep.classList.add("mobile-stepper-dot-selected")
 
@@ -1455,7 +1456,7 @@
                 //Label error
                 addLabelErrorAfterend("O número de CPF parece não estar correto", inputCPF)
 
-                switchStepper("cpf")
+                switchStepper("step1")
 
                 // Função que verifica se há erros no CPF
                 inputCPF.addEventListener('input', () => {
@@ -1473,10 +1474,20 @@
 
                 handleStepField(inputPhoneNumber, "Ex. (99) 99123-4567", null)
 
+                var lastDigitsPhone= document.getElementById("lastDigitsPhone")
+                
                 inputPhoneNumber.addEventListener('input', () => {
+
                     inputPhoneNumber.value = formatPhoneNumber(inputPhoneNumber.value);
                     continueToNextStep((inputPhoneNumber.value.length == 18 && checkboxTermOfUse.checked), inputPhoneNumber)
                 });
+            }
+        }
+
+        if (migrationMessageTitle != null) {
+            if (migrationMessageTitle.offsetParent !== null) {
+                switchStepper("step1")
+                migrationMessageTitle.classList.add("StepTitle")
             }
         }
 
@@ -1484,32 +1495,30 @@
         if (inputNome != null) {
             if (inputNome.offsetParent !== null) {
 
-                var nameToMessageSignIn = document.getElementById("displayNameRegistered")
+                var lastDigitsPhone= document.getElementById("lastDigitsPhone")
                 var stepsMessage = "Falta pouco para concluir seu cadastro"
                 
-                if(nameToMessageSignIn != null && nameToMessageSignIn.offsetParent !== null && nameToMessageSignIn.value){
-                    stepsMessage = "Preencha o número do seu celular cadastrado "+ inputPhoneNumber.value.substring(0, 7) +" *****-"+inputPhoneNumber.value.substring(14, inputPhoneNumber.value.lenght)+". Assim, enviaremos um código de verificação."
+                if(lastDigitsPhone != null && lastDigitsPhone.offsetParent !== null && lastDigitsPhone.value){
+                    stepsMessage = "Preencha o número do seu celular cadastrado que termina com " + lastDigitsPhone.value + ". Assim, enviaremos um código de verificação."
 
                     document.getElementById("displayName_label").style.display = 'none'
                     document.getElementById("displayName").style.display = 'none'
-                    var phoneNumberToStepsMessage = inputPhoneNumber.value
-
 
                     inputPhoneNumber.value = ""
 
                 }
-                nameToMessageSignIn.style.display = 'none'
-
+                lastDigitsPhone.style.display = 'none'
 
                 handleStepField(inputNome, "Ex. João da Silva", stepsMessage)
 
-                switchStepper("nome")
+                switchStepper("step3")
 
             }
         }
 
         if (checkboxTermOfUse != null) {
             var labelToTermOfUse = document.querySelectorAll('label[for="termsOfUse_true"]');
+            var lastDigitsPhone= document.getElementById("lastDigitsPhone")
 
             labelToTermOfUse[0].innerHTML = "Eu aceito os <a href='#' title='Termos de Uso'>Termos de Uso</a> (obrigatório)"
             checkboxTermOfUse.addEventListener('change', function () {
@@ -1535,11 +1544,9 @@
                     
                 handleStepField(inputDataDeNascimento, null, stepsMessage)
 
-                switchStepper("dataDeNascimento")
+                switchStepper("step2")
             }
         }
-
-
 
         function isValidCPF(cpf) {
             cpf = cpf.replace(/[^\d]+/g, '');
