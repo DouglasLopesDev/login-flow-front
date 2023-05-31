@@ -54,6 +54,7 @@ var inputDateOfBirth = document.getElementById("dateOfBirth");
 var cpfStep = document.getElementById("cpfStep")
 var dateOfBirthStep = document.getElementById("dateOfBirthStep")
 var nameStep = document.getElementById("nameStep")
+var phoneFactorStep = document.getElementById("phoneFactor")
 var inputPhoneNumber = document.getElementById("strongAuthenticationPhoneNumber")
 var checkboxTermOfUse = document.getElementById("termsOfUse_true")
 var migrationMessageTitle = document.getElementById("migrationMessageTitle")
@@ -107,6 +108,11 @@ function switchStepper(step) {
         case "step3":
             dateOfBirthStep.classList.remove("mobile-stepper-dot-selected")
             nameStep.classList.add("mobile-stepper-dot-selected")
+
+            break;
+        case "step4":
+            nameStep.classList.remove("mobile-stepper-dot-selected")
+            phoneFactor.classList.add("mobile-stepper-dot-selected")
 
             break;
 
@@ -344,4 +350,55 @@ function getQueryStringByName(name, url) {
     if (!results) return null;
     if (!results[2]) return '';
     return decodeURIComponent(results[2].replace(/\+/g, ' '));
+}
+// A PARTIR DAQUI É PHONEFACTOR
+var verCode = document.getElementById("verificationCode");
+if (null != verCode) {
+    console.log('modifying object verificationCode');
+    verCode.setAttribute("autocomplete", "one-time-code");
+    verCode.setAttribute("inputmode", "numeric");
+}
+var verPhone = document.getElementById("verifyPhone");
+if (null != verPhone) {
+    console.log('modifying object verifyPhone');
+    verPhone.parentNode.removeChild(verPhone);
+}
+var introText = document.getElementById('api').getElementsByTagName('P')[0];
+if (null != introText) {
+    console.log('modifying object verifyCode');
+    document.getElementById("verifyCode").setAttribute("aria-label", introText.innerHTML);
+}
+
+function verifyCodeTimer() {
+    setTimeout(function () {
+        if (verCode.value.length >= parseInt(verCode.getAttribute("maxlength"))) {
+            document.getElementById("verifyCode").click();
+        } else {
+            verifyCodeTimer();
+        }
+    }, 1000);
+}
+
+var buttonSendCode = document.getElementById("sendCode")
+
+function handleButtonSendCode() {
+    setTimeout(function () {
+        if (buttonSendCode.offsetHeight !== null) {
+            buttonSendCode.click();
+        } else {
+            handleButtonSendCode();
+        }
+    }, 300);
+}
+
+if (buttonSendCode != null && buttonSendCode.offsetParent != null) {
+    buttonSendCode.addEventListener("click", async function () {
+        verifyCodeTimer();
+    });
+
+    buttonSendCode.textContent = "Reenviar"
+
+    handleButtonSendCode()
+    handleStepField(null, null, "Insira o código enviado para")
+    switchStepper("step4")
 }
