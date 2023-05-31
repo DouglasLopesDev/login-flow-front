@@ -1296,8 +1296,8 @@
                             <div class="steps">
                                 <div class="mobile-stepper-root">
                                     <div id="cpfStep" class="mobile-stepper-dot"></div>
-                                    <div id="dataDeNascimentoStep" class="mobile-stepper-dot"></div>
-                                    <div id="nomeStep" class="mobile-stepper-dot"></div>
+                                    <div id="dateOfBirthStep" class="mobile-stepper-dot"></div>
+                                    <div id="nameStep" class="mobile-stepper-dot"></div>
                                     <div id="" class="mobile-stepper-dot"></div>
                                 </div>
                             </div>
@@ -1362,14 +1362,14 @@
 
         var inputCPF = document.getElementById("signInNames.userName");
         var stepTitle = document.querySelector('#StepTitle');
-        var inputNome = document.getElementById("displayName");
+        var inputName = document.getElementById("displayName");
         var givenName = document.getElementById("givenName");
         var surName = document.getElementById("surName");
-        var inputDataDeNascimento = document.getElementById("dataDeNascimento");
+        var inputDateOfBirth = document.getElementById("dateOfBirth");
 
         var cpfStep = document.getElementById("cpfStep")
-        var dataDeNascimentoStep = document.getElementById("dataDeNascimentoStep")
-        var nomeStep = document.getElementById("nomeStep")
+        var dateOfBirthStep = document.getElementById("dateOfBirthStep")
+        var nameStep = document.getElementById("nameStep")
         var inputPhoneNumber = document.getElementById("strongAuthenticationPhoneNumber")
         var checkboxTermOfUse = document.getElementById("termsOfUse_true")
         var migrationMessageTitle = document.getElementById("migrationMessageTitle")
@@ -1417,12 +1417,12 @@
                     break;
                 case "step2":
                     cpfStep.classList.remove("mobile-stepper-dot-selected")
-                    dataDeNascimentoStep.classList.add("mobile-stepper-dot-selected")
+                    dateOfBirthStep.classList.add("mobile-stepper-dot-selected")
 
                     break;
                 case "step3":
-                    dataDeNascimentoStep.classList.remove("mobile-stepper-dot-selected")
-                    nomeStep.classList.add("mobile-stepper-dot-selected")
+                    dateOfBirthStep.classList.remove("mobile-stepper-dot-selected")
+                    nameStep.classList.add("mobile-stepper-dot-selected")
 
                     break;
 
@@ -1498,8 +1498,8 @@
         }
 
         // tratamentos relacionados ao campo nome
-        if (inputNome != null) {
-            if (inputNome.offsetParent !== null) {
+        if (inputName != null) {
+            if (inputName.offsetParent !== null) {
 
                 var lastDigitsPhone= document.getElementById("hiddenDigitsPhone")
                 var stepsMessage = "Falta pouco para concluir seu cadastro"
@@ -1519,11 +1519,11 @@
                 document.getElementById("surName_label").style.display = 'none'
                 surName.style.display = 'none'
 
-                inputNome.addEventListener('input', () => {
-                    handleSurnameEGivenName(inputNome.value)
+                inputName.addEventListener('input', () => {
+                    handleSurnameEGivenName(inputName.value)
                 })
 
-                handleStepField(inputNome, "Ex. João da Silva", stepsMessage)
+                handleStepField(inputName, "Ex. João da Silva", stepsMessage)
 
                 switchStepper("step3")
 
@@ -1544,8 +1544,8 @@
         }
 
         // tratamentos relacionados ao campo dataDeNascimento
-        if (inputDataDeNascimento != null) {
-            if (inputDataDeNascimento.offsetParent !== null) {
+        if (inputDateOfBirth != null) {
+            if (inputDateOfBirth.offsetParent !== null) {
                 var stepsMessage =  "Agora, digite sua data de nascimento para continuar."
                 var nameToMessageSignIn = document.getElementById("displayNameRegistered")
                 
@@ -1555,7 +1555,7 @@
                 nameToMessageSignIn.style.display = 'none'
 
                     
-                handleStepField(inputDataDeNascimento, null, stepsMessage)
+                handleStepField(inputDateOfBirth, null, stepsMessage)
 
                 switchStepper("step2")
             }
