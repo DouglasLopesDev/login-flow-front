@@ -158,10 +158,15 @@ if (inputCPF != null) {
         switchStepper("step1")
 
         // Função que verifica se há erros no CPF
-        inputCPF.addEventListener('input', () => {
+        inputCPF.addEventListener('input', (event) => {
             inputCPF.value = formatCPF(inputCPF.value);
             const cpf = inputCPF.value;
-            continueToNextStep(validCPF(cpf), inputCPF);
+
+            const validCpfResult = validCPF(cpf)
+
+            if (!validCpfResult && event.key === "Enter") console.log("açlsdkfj")
+
+            continueToNextStep(validCpfResult, inputCPF);
 
         });
     }
