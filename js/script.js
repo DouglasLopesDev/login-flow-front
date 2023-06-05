@@ -163,7 +163,7 @@ if (inputCPF != null) {
             const cpf = inputCPF.value;
 
             const validCpfResult = validCPF(cpf)
-
+            console.log("event.key", event.key)
             if (!validCpfResult && event.key === "Enter") console.log("açlsdkfj")
 
             continueToNextStep(validCpfResult, inputCPF);
