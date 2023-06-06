@@ -150,7 +150,7 @@ function handleSurnameEGivenName(displayName) {
 if (inputCPF != null) {
     if (inputCPF.offsetParent !== null) {
 
-        handleStepField(inputCPF, "Ex. 123.456.789-01", "Por favor, atualizado 1 digite seu CPF para iniciar o cadastro.")
+        handleStepField(inputCPF, "Ex. 123.456.789-01", "Por favor, digite seu CPF para iniciar o cadastro.")
 
         //Label error
         addLabelErrorAfterend("O número de CPF parece não estar correto", inputCPF)
