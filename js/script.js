@@ -124,7 +124,7 @@ function switchStepper(step) {
 function formatPhoneNumber(value) {
 
     if (value.length >= 3) value = value.substr(3)
-    else value = ""
+    else value += ""
     // Remove tudo que não for número
     let phoneNumber = value.replace(/\D/g, '');
     phoneNumber = phoneNumber.slice(0, 11);
